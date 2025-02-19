@@ -146,7 +146,10 @@ def read_eeg(filename, vhdr):
         info = vhdr['Channel Infos']['Ch%d' % (ch+1)]
         parts = info.split(',') + ['µV'] # older files might not have the Unit field, default is µV
         (name, ref, resolution, unit) = parts[0:4]
-        eeg[ch] = eeg[ch] * float(resolution)
+        if resolution:
+            eeg[ch] = eeg[ch] * float(resolution)
+        else:
+            print(f"Unknown resolution for '{filename}', defaulting to 1")
     return eeg
 
 
