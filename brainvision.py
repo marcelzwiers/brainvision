@@ -171,7 +171,7 @@ def read_ini(filename):
             pass
         elif line.startswith('['):
             # this is a section header
-            section = line[1:-1]
+            section = line[1:-1].replace(' infos', ' Infos')    # Catch v1.0: https://github.com/mne-tools/mne-testing-data/blob/master/Brainvision/test_NO.vhdr
             ini[section] = {}
         elif '=' in line:
             # this is a key=value pair
